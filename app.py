@@ -1,37 +1,20 @@
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask_restful import Api
+from flask_jwt import JWT
+from os import getenv
+
+from models.user import User
+# from security import authenticate, identity
+from resources.user import UserRegister
+
 
 app = Flask(__name__)
-persons = [
-    {'name': 'Artyom', 'age': 21},
-    {'name': 'John', 'age': 30}
-]
+# app.secret_key = getenv("secret_key")
 
+# jwt = JWT(app, authenticate, identity)
 
-@app.route('/')
-def home():
-    return "<h1>Hello world!</h1>"
+api = Api(app)
+api.add_resource(UserRegister, '/')
 
-
-@app.route('/persons', methods=['POST'])
-def add_person():
-    request_data = request.get_json()
-    new_person = {
-        'name': request_data['name'],
-        'age': request_data['age']
-    }
-    persons.append(new_person)
-    return jsonify(new_person)
-
-
-@app.route('/persons/<string:name>')
-def get_data_by_name(name):
-    matching_persons = list(filter(lambda person: person['name'] == name, persons))
-    return jsonify({'data': matching_persons})
-
-
-@app.route('/persons')
-def get_persons():
-    return jsonify({'persons': persons})
-
-
-app.run(port=5000)
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
