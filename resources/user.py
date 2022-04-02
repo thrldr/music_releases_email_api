@@ -6,20 +6,13 @@ from hashlib import md5
 
 def make_parser() -> reqparse.RequestParser:
     parser = reqparse.RequestParser()
-    parser.add_argument('username',
-            type=str,
-            required=True,
-            help="Field 'username' cannot be omitted."
-            )
-    parser.add_argument('password',
-            type=str,
-            required=True,
-            help="Field 'password' cannot be omitted."
-            )
-    parser.add_argument('email',
-            type=str,
-            required=True,
-            help="Field 'email' cannot be omitted."
+    arguments = ['username', 'password', 'email']
+
+    for argument in arguments:
+        parser.add_argument(argument,
+                type=str,
+                required=True,
+                help=f"Field '{argument}' cannot be omitted."
             )
     return parser
 
@@ -39,5 +32,6 @@ class UserRegister(Resource):
                 data['email']
                ) 
         new_user.save_to_database()
+        return {"message": "successfully registered"}
 
 

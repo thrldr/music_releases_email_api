@@ -7,6 +7,14 @@ class UserModel:
         self._hash = _hash
         self._email = email
         self._values = (self._username, self._hash, self._email)
+        self._is_active = False
+
+    
+    def activate(self):
+        pass
+
+    def deactivate(self):
+        pass
 
     def in_database(self):
         if self._db.find_by_value('users', 'username', self._username):
