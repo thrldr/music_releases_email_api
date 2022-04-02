@@ -3,12 +3,15 @@ from psycopg2 import sql
 import os
 
 class DBManager:
-    connection = psycopg2.connect(
-            database=os.getenv('DATABASE'),
-            user=os.getenv('USERNAME'),
-            password=os.getenv('PASSWORD'),
-            host=os.getenv('HOST'),
-            port=os.getenv('PORT')
+    '''A class resposible for managing database'''
+
+    def __init__(self, connection_data: dict):
+        self.connection = psycopg2.connect(
+            database=connection_data['database'],
+            user=connection_data['user'],
+            password=connection_data['password'],
+            host=connection_data['host'],
+            port=connection_data['port'],
         )
 
     @classmethod
