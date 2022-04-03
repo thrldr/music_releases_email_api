@@ -3,7 +3,6 @@ from models.user import UserModel
 from resources.parser import make_parser
 from hashlib import md5
 from database.initialize import db
-
 from flask_jwt_extended import create_access_token
 
 

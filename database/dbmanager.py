@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2 import sql
-import os
+
 
 class DBManager:
     '''A class resposible for managing database'''
@@ -23,7 +23,7 @@ class DBManager:
         cur.close()
         return data
     
-    def find_by_value(self, table, field, value):
+    def find_by_value(self, table: str, field: str, value):
         cur = self.connection.cursor()
         query = f"SELECT * FROM {table} WHERE {field} = '{value}'"
         cur.execute(query)
@@ -43,7 +43,7 @@ class DBManager:
         values_string = values_string[0:-2] + ')'
         return values_string
 
-    def insert(self, table, *values):
+    def insert(self, table: str, *values):
         cur = self.connection.cursor()
 
         values_string = DBManager.make_values_string(*values)
@@ -54,3 +54,17 @@ class DBManager:
         cur.close()
         self.connection.commit()
         return
+
+    def activate(self, id: str):
+        cur = self.connection.cursor()
+        query = f"UPDATE users SET active = TRUE WHERE email = '{id}'"
+        cur.execute(query)
+        cur.close
+        self.connection.commit()
+    
+    def deactivate(self, id: str):
+        cur = self.connection.cursor()
+        query = f"UPDATE users SET active = FALSE WHERE email = '{id}'"
+        cur.execute(query)
+        cur.close
+        self.connection.commit()

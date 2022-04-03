@@ -1,5 +1,6 @@
 from database.dbmanager import DBManager
 
+
 class UserModel:
     def __init__(
             self,
@@ -16,10 +17,13 @@ class UserModel:
         self._is_active = is_active
     
     def activate(self):
-        pass
+        self._db.activate(self._email)
 
     def deactivate(self):
-        pass
+        self._db.deactivate(self._email)
+
+    def is_active(self):
+        return self._is_active
 
     def in_database(self):
         if self._db.find_by_value('users', 'email', self._email):
