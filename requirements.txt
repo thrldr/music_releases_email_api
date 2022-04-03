@@ -1,5 +1,5 @@
 Flask
 Flask-RESTful
-Flask-JWT
+Flask-JWT-Extended
 psycopg2-binary
 requests
