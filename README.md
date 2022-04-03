@@ -1,6 +1,6 @@
 # Description
-This is an api that allows you to receive email notifications of new releases by selected bands from the discogs.com database. I'm going to use an OAuth to authenticate with the service's api so an account is necessary. For email sending I'm plainning on using Mailgun's python client.
+This is an api that allows you to receive email notifications of new releases by selected musical bands from the discogs.com database. I'm planning on using OAuth to authenticate with the discogs website thus an account is necessary.  For delivering emails I decided to stick with Mailgun.
 ## How to run it
-In order for this api to work it requires an external database. I've decided to use postgresql. To connect to the database you need to set the environment variables located in env_vars.sh.
+In order for this api to work you need an external psql database. To connect to the database you need to set the environment variables located in env_vars.sh.
 ## Current functionality
-As of now, the api is only capable of accepting post requests that put your user data into a database.
+As of yet the api is capable of registering a new user and putting it to a db, loging in and returning a JWT and changing the current status of an email.
